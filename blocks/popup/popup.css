@@ -1,7 +1,12 @@
-.main-page {
-  background-color: #000000;
-  padding: 45px 0 60px;
-  color: #FFFFFF;
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  color: #000000;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -9,10 +14,4 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-}
-
-@media screen and (max-width: 425px){
-  .main-page {
-    padding: 28px 0 36px
-  }
 }

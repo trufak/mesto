@@ -35,3 +35,15 @@
 /*Стили блока footer*/
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
+
+/*Стили блока popup*/
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/popup/__container/popup__container.css);
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__input-field/popup__input-field.css);
+@import url(../blocks/popup/__profile-title/popup__profile-title.css);
+@import url(../blocks/popup/__profile-subtitle/popup__profile-subtitle.css);
+@import url(../blocks/popup/__submit-button/popup__submit-button.css);
+@import url(../blocks/popup/__submit-button-caption/popup__submit-button-caption.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
