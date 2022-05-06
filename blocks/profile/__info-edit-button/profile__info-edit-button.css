@@ -1,0 +1,33 @@
+.profile__info-edit-button {
+  position: absolute;
+  top: 15px;
+  right: -42px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFFFFF;
+  border-radius: 0;
+  background: transparent;
+  background-image: url(../../../images/edit_image.svg);
+  background-size: 10px 10px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media screen and (max-width: 768px){
+  .profile__info-edit-button {
+    right: calc(-32px - (100vw - 425px)*(42 - 32)/(768 - 425));;
+  }
+}
+
+@media screen and (max-width: 425px){
+  .profile__info-edit-button {
+    top: 8px;
+    right: -28px;
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px 7.5px;
+  }
+}

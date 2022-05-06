@@ -1,0 +1,4 @@
+.element__mask {
+  grid-area: mask;
+  width: 100%;
+}
