@@ -19,7 +19,7 @@
 
 @media screen and (max-width: 768px){
   .profile__info-edit-button {
-    right: calc(-32px - (100vw - 425px)*(42 - 32)/(768 - 425));;
+    right: calc(-32px - (100vw - 425px)*(42 - 32)/(768 - 425));
   }
 }
 
