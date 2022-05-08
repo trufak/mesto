@@ -4,6 +4,7 @@
   text-align: center;
   color: #FFFFFF;
   margin: 14px auto 14px;
+  display: block;
 }
 
 @media screen and (max-width: 568px){
