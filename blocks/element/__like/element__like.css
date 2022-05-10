@@ -1,4 +1,10 @@
 .element__like {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 0;
+  background: transparent;
   grid-area: like;
   background-image: url(../../../images/like.svg);
   width: 22px;
