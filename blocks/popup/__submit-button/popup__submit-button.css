@@ -4,21 +4,27 @@
   appearance: none;
   display: block;
   width: 100%;
-  margin: 47px 0 0;
+  margin: 45px 0 0;
   background: #000000;
   border-radius: 2px;
   border: none;
   padding: 0;
   cursor: pointer;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #FFFFFF;
+  padding: 14px 0 14px;
 }
 
 @media screen and (max-width: 568px){
   .popup__submit-button {
-    margin: 45px 0 0;
+    margin: 44px 0 0;
+    font-size: 14px;
+    line-height: 17px;
   }
 }
 
 .popup__submit-button:hover {
   opacity: 0.8;
 }
-

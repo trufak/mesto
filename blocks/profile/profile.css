@@ -2,7 +2,7 @@
   max-width: 880px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: max-content max-content 1fr;
+  grid-template-columns: 120px minmax(0, 1fr) 150px;
   grid-template-rows: 1fr;
   grid-template-areas: "avatar info add_button";
   justify-items: start;
@@ -24,6 +24,7 @@
     "avatar"
     "info"
     "add_button";
+    justify-items: center;
     width: 282px;
     padding: 42px 0 0;
   }

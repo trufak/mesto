@@ -4,8 +4,8 @@ let descriptProfile = profile.querySelector('.profile__subtitle');
 let editButton = profile.querySelector('.profile__info-edit-button');
 let popup = document.querySelector('.popup');
 let popupForm = popup.querySelector('.popup__container');
-let popupNameProfile = popup.querySelector('.popup__profile-title');
-let popupDescriptProfile = popup.querySelector('.popup__profile-subtitle');
+let popupNameProfile = popup.querySelector('.popup__input_title');
+let popupDescriptProfile = popup.querySelector('.popup__input_subtitle');
 let closePopupButton = popup.querySelector('.popup__close-button');
 /*Обработчик события click на кнопке editButton*/
 editButton.addEventListener ('click', popupOpen);

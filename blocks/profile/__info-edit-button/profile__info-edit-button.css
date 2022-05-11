@@ -1,7 +1,5 @@
 .profile__info-edit-button {
-  position: absolute;
-  top: 15px;
-  right: -42px;
+  grid-area: edit-button;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -17,16 +15,9 @@
   cursor: pointer;
 }
 
-@media screen and (max-width: 768px){
-  .profile__info-edit-button {
-    right: calc(-32px - (100vw - 425px)*(42 - 32)/(768 - 425));
-  }
-}
-
 @media screen and (max-width: 425px){
   .profile__info-edit-button {
-    top: 8px;
-    right: -28px;
+    justify-self: start;
     width: 18px;
     height: 18px;
     background-size: 7.5px 7.5px;
