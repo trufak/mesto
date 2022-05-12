@@ -5,9 +5,9 @@ let nameProfile = profile.querySelector('.profile__title');
 let descriptProfile = profile.querySelector('.profile__subtitle');
 let editButton = profile.querySelector('.profile__info-edit-button');
 let popup = document.querySelector('.popup');
-let popupForm = popup.querySelector('.popup__container');
-let popupNameProfile = popup.querySelector('.popup__input_title');
-let popupDescriptProfile = popup.querySelector('.popup__input_subtitle');
+let popupForm = popup.querySelector('form[name=popup]');
+let popupNameProfile = popup.querySelector('.popup__input_type_name');
+let popupDescriptProfile = popup.querySelector('.popup__input_type_desc');
 let closePopupButton = popup.querySelector('.popup__close-button');
 
 /*Функции*/
