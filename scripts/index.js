@@ -1,5 +1,4 @@
 /*Переменные*/
-
 const profile = document.querySelector('.profile');
 const nameProfile = profile.querySelector('.profile__title');
 const descriptProfile = profile.querySelector('.profile__subtitle');
@@ -10,27 +9,27 @@ const cardTemplate = document.querySelector('#card').content;
 const initialCards = [
   {
     name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    link: './images/arkhyz.jpg'
   },
   {
     name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    link: './images/chelyabinsk-oblast.jpg'
   },
   {
     name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    link: './images/ivanovo.jpg'
   },
   {
     name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    link: './images/kamchatka.jpg'
   },
   {
     name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    link: './images/kholmogorsky-rayon.jpg'
   },
   {
     name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    link: './images/baikal.jpg'
   }
 ];
 const popupTemplate = document.querySelector('#popup').content;
@@ -40,19 +39,25 @@ const formNames = {
   add: 'add'
 };
 const popupEditProfile = createPopup(formNames.edit);
+const popupNameProfile = popupEditProfile.querySelector('.popup__input_name-profile');
+const popupDescProfile = popupEditProfile.querySelector('.popup__input_desc-profile');
 const popupAddCard = createPopup(formNames.add);
+const popupNameCard = popupAddCard.querySelector('.popup__input_name-card');
+const popupLinkCard = popupAddCard.querySelector('.popup__input_link-card');
 
 /*Функции*/
 /*Загрузка карточек при старте страницы*/
 function initialCardsLoad() {
-  let card;
   initialCards.forEach (initData => {
-    card = cardTemplate.querySelector('.elements__item').cloneNode(true);
-    card.querySelector('.element__mask').src = initData.link;
-    card.querySelector('.element__mask').alt = initData.name;
-    card.querySelector('.element__caption').textContent = initData.name;
-    elements.append(card);
+    elements.append(createCard(initData.name, initData.link));
   });
+}
+function createCard (name, link) {
+  const card = cardTemplate.querySelector('.elements__item').cloneNode(true);
+  card.querySelector('.element__mask').src = link;
+  card.querySelector('.element__mask').alt = name;
+  card.querySelector('.element__caption').textContent = name;
+  return card;
 }
 /*Создать popup*/
 function createPopup(formName) {
@@ -66,16 +71,24 @@ function createPopup(formName) {
       title = 'Редактировать профиль';
       buttonCaption = 'Сохранить';
       valueInputs.push(
-        {value: nameProfile.textContent},
-        {value: descriptProfile.textContent});
+        {
+          class: 'popup__input_name-profile',
+          value: nameProfile.textContent},
+        {
+          class: 'popup__input_desc-profile',
+          value: descriptProfile.textContent});
       submitCallBack = editFormSubmit;
       break;
     case formNames.add:
       title = 'Новое место';
       buttonCaption = 'Создать';
       valueInputs.push(
-        {placeHolder: 'Название'},
-        {placeHolder: 'Ссылка на картинку'});
+        {
+          class: 'popup__input_name-card',
+          placeHolder: 'Название'},
+        {
+          class: 'popup__input_link-card',
+          placeHolder: 'Ссылка на картинку'});
       submitCallBack = addFormSubmit;
       break;
   }
@@ -91,6 +104,7 @@ function createPopup(formName) {
   if (valueInputs) {
     valueInputs.forEach(valueInput => {
       input = inputTemplate.querySelector('.inputs__item').cloneNode(true);
+      input.querySelector('.popup__input').classList.add(valueInput.class);
       if (valueInput.value) input.querySelector('.popup__input').value = valueInput.value;
       if (valueInput.placeHolder) input.querySelector('.popup__input').placeholder = valueInput.placeHolder;
       inputs.append(input);
@@ -114,8 +128,8 @@ function popupOpen(e) {
     popup.classList.add('popup_opened');
 }
 /*Закрыть popup*/
-function popupClose (e) {
-  const popup = e.target.parentElement.parentElement;
+function popupClose (e, popup) {
+  if (!popup) popup = e.target.parentElement.parentElement;
   if (popup.classList.contains('popup_opened'))
     popup.classList.remove('popup_opened');
 }
@@ -123,12 +137,14 @@ function popupClose (e) {
 function editFormSubmit (e) {
   e.preventDefault();
   nameProfile.textContent = popupNameProfile.value;
-  descriptProfile.textContent = popupDescriptProfile.value;
-  popupClose();
+  descriptProfile.textContent = popupDescProfile.value;
+  popupClose(e, e.target.parentElement.parentElement.parentElement);
 }
-/*Отправка формы добавления нового места*/
+/*Отправка формы добавления карточки нового места*/
 function addFormSubmit (e) {
-
+  e.preventDefault();
+  elements.append(createCard(popupNameCard.value, popupLinkCard.value));
+  popupClose(e, e.target.parentElement.parentElement.parentElement);
 }
 
 /*Обработчики событий
