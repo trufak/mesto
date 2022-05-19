@@ -14,7 +14,7 @@
 @media screen and (max-width: 768px){
   .elements {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 362px);
     max-width: 581px;
   }
 }
@@ -24,6 +24,6 @@
     width: 282px;
     padding-top: 36px;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 362px);
   }
 }
