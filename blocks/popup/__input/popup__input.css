@@ -9,3 +9,8 @@
   font-size: 14px;
   line-height: 17px;
 }
+
+.popup__input:focus {
+  box-shadow: 0px 0px 2px 3px rgb(89, 137, 233);
+  outline: 0;
+}

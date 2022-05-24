@@ -1,17 +1,17 @@
-.popup {
+.element-popup {
   position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility .5s, opacity .5s linear;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  visibility: hidden;
-  opacity: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: visibility ,2s, opacity .2s linear;
-  color: #000000;
+  color: #ffffff;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
@@ -19,4 +19,5 @@
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+
 }

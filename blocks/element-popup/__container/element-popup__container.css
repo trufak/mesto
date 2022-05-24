@@ -1,0 +1,8 @@
+.element-popup__container {
+  margin: 0 auto;
+  position: relative;
+  display: grid;
+  row-gap: 10px;
+}
+
+
