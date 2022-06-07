@@ -156,7 +156,7 @@ function addFormSubmit (e) {
   elements.insertBefore(createCard(popupNameCard.value, popupLinkCard.value),
                                   elements.firstChild);
   //Закрытие popup
-  popupClose(e, e.target.parentElement.parentElement.parentElement);
+  closePopup(e, e.target.parentElement.parentElement.parentElement);
 }
 //Изменение стилей cardLikeButtons при нажатии
 function likeCard(e) {
