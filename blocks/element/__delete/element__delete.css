@@ -5,7 +5,6 @@
   appearance: none;
   border: none;
   border-radius: 0;
-  grid-area: mask;
   background: url(../../../images/krishka_delete.svg) top no-repeat,
               url(../../../images/delete.svg) bottom no-repeat;
   background-color: transparent;
