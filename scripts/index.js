@@ -147,7 +147,7 @@ function editFormSubmit (e) {
   e.preventDefault();
   nameProfile.textContent = popupNameProfile.value;
   descriptProfile.textContent = popupDescProfile.value;
-  popupClose(e, e.target.parentElement.parentElement.parentElement);
+  closePopup(e, e.target.parentElement.parentElement.parentElement);
 }
 //Отправка формы добавления карточки нового места
 function addFormSubmit (e) {
@@ -157,6 +157,8 @@ function addFormSubmit (e) {
                                   elements.firstChild);
   //Закрытие popup
   closePopup(e, e.target.parentElement.parentElement.parentElement);
+  popupNameCard.value = null;
+  popupLinkCard.value = null;
 }
 //Изменение стилей cardLikeButtons при нажатии
 function likeCard(e) {
