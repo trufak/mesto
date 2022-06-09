@@ -37,24 +37,40 @@
       <h2 class="element-popup__caption"></h2>
     </div>
   </div>
-  <template id="popup">
-    <div class="popup">
-      <div class="popup__container">
-        <button type="button" class="close-button close-button_popup" aria-label="Закрыть"></button>
-        <h3 class="popup__title"></h3>
-        <form>
-          <ul class="popup__inputs">
-          </ul>
-          <button type="submit" class="popup__submit-button"></button>
-        </form>
-      </div>
+  <div class="popup popup_edit-profile">
+    <div class="popup__container">
+      <button type="button" class="close-button close-button_popup" aria-label="Закрыть"></button>
+      <h3 class="popup__title">Редактировать профиль</h3>
+      <form name="edit">
+        <ul class="popup__inputs">
+          <li class="inputs__item">
+            <input class="popup__input popup__input_name-profile" type="text">
+          </li>
+          <li class="inputs__item">
+            <input class="popup__input popup__input_desc-profile" type="text">
+          </li>
+        </ul>
+        <button type="submit" class="popup__submit-button popup__submit-button_edit">Сохранить</button>
+      </form>
     </div>
-  </template>
-  <template id="popup__input">
-    <li class="inputs__item">
-      <input class="popup__input" type="text">
-    </li>
-  </template>
+  </div>
+  <div class="popup popup_add-card">
+    <div class="popup__container">
+      <button type="button" class="close-button close-button_popup" aria-label="Закрыть"></button>
+      <h3 class="popup__title">Новое место</h3>
+      <form name="add">
+        <ul class="popup__inputs">
+          <li class="inputs__item">
+            <input class="popup__input popup__input_name-card" type="text" placeholder="Название">
+          </li>
+          <li class="inputs__item">
+            <input class="popup__input popup__input_link-card" type="text" placeholder="Ссылка на картинку">
+          </li>
+        </ul>
+        <button type="submit" class="popup__submit-button popup__submit-button_add">Создать</button>
+      </form>
+    </div>
+  </div>
   <template id="card">
     <li class="elements__item">
       <article class="element">

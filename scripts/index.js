@@ -35,20 +35,20 @@ const initialCards = [
   }
 ];
 //Переменные для блока popup
-const popupTemplate = document.querySelector('#popup').content;
-const inputTemplate = document.querySelector('#popup__input').content;
-const formNames = {
-  edit: 'edit',
-  add: 'add'
-};
-const popupEditProfile = createPopup(formNames.edit);
+const popupEditProfile = document.querySelector('.popup_edit-profile');
 const popupNameProfile = popupEditProfile.querySelector('.popup__input_name-profile');
 const popupDescProfile = popupEditProfile.querySelector('.popup__input_desc-profile');
-const popupAddCard = createPopup(formNames.add);
+const popupEditProfileSubmit = popupEditProfile.querySelector('.popup__submit-button_edit');
+const popupEditProfileClose = popupEditProfile.querySelector('.close-button_popup');
+const popupAddCard = document.querySelector('.popup_add-card');
 const popupNameCard = popupAddCard.querySelector('.popup__input_name-card');
 const popupLinkCard = popupAddCard.querySelector('.popup__input_link-card');
+const popupAddCardSubmit = popupAddCard.querySelector('.popup__submit-button_add');
+const popupAddCardClose = popupAddCard.querySelector('.close-button_popup');
+
 //Переменные для блока element-popup
 const popupCard = document.querySelector('.element-popup');
+const popupCardClose = popupCard.querySelector('.close-button_popup');
 
 //Функции
 //Загрузка карточек при старте страницы
@@ -68,71 +68,19 @@ function createCard (name, link) {
   card.querySelector('.element__mask').addEventListener('click', openPopupCard);
   return card;
 }
-//Создать popup
-function createPopup(formName) {
-  //Определение переменных для формирования popup
-  let title;
-  let buttonCaption;
-  let valueInputs=[];
-  let submitCallBack;
-  switch (formName) {
-    case formNames.edit:
-      title = 'Редактировать профиль';
-      buttonCaption = 'Сохранить';
-      valueInputs.push(
-        {
-          class: 'popup__input_name-profile',
-          value: nameProfile.textContent},
-        {
-          class: 'popup__input_desc-profile',
-          value: descriptProfile.textContent});
-      submitCallBack = editFormSubmit;
-      break;
-    case formNames.add:
-      title = 'Новое место';
-      buttonCaption = 'Создать';
-      valueInputs.push(
-        {
-          class: 'popup__input_name-card',
-          placeHolder: 'Название'},
-        {
-          class: 'popup__input_link-card',
-          placeHolder: 'Ссылка на картинку'});
-      submitCallBack = addFormSubmit;
-      break;
-  }
-  //Копирование popup
-  const popup = popupTemplate.querySelector('.popup').cloneNode(true);
-  //Запись title popup
-  popup.querySelector('.popup__title').textContent = title;
-  //Запись имени формы
-  popup.querySelector('form').name = formName;
-  //Запись значений и placeholder полей ввода
-  const inputs = popup.querySelector('.popup__inputs');
-  let input;
-  if (valueInputs) {
-    valueInputs.forEach(valueInput => {
-      input = inputTemplate.querySelector('.inputs__item').cloneNode(true);
-      input.querySelector('.popup__input').classList.add(valueInput.class);
-      if (valueInput.value) input.querySelector('.popup__input').value = valueInput.value;
-      if (valueInput.placeHolder) input.querySelector('.popup__input').placeholder = valueInput.placeHolder;
-      inputs.append(input);
-    });
-  }
-
-  //Запись подписи кнопки submit
-  popup.querySelector('.popup__submit-button').textContent = buttonCaption;
-  //Добавление обработчика события click на кнопке submit-button
-  popup.querySelector('.popup__submit-button').addEventListener('click', submitCallBack);
-  //Добавление обработчика события click на кнопке close-button
-  popup.querySelector('.close-button_popup').addEventListener('click', closePopup);
-  return popup;
-}
 //Открыть popup
 function openPopup(e) {
   let popup;
-  if (e.target === editButton) popup = popupEditProfile;
-  if (e.target === addButton) popup = popupAddCard;
+  if (e.target === editButton)  {
+    popup = popupEditProfile;
+    popupNameProfile.value = nameProfile.textContent;
+    popupDescProfile.value = descriptProfile.textContent;
+  }
+  if (e.target === addButton) {
+    popup = popupAddCard;
+    popupNameCard.value = null;
+    popupLinkCard.value = null;
+  }
   if (!popup.classList.contains('popup_opened'))
     popup.classList.add('popup_opened');
 }
@@ -157,8 +105,6 @@ function addFormSubmit (e) {
                                   elements.firstChild);
   //Закрытие popup
   closePopup(e, e.target.parentElement.parentElement.parentElement);
-  popupNameCard.value = null;
-  popupLinkCard.value = null;
 }
 //Изменение стилей cardLikeButtons при нажатии
 function likeCard(e) {
@@ -192,14 +138,19 @@ function createPopupCard(e) {
 editButton.addEventListener ('click', openPopup);
 //Обработчик события click на кнопке addButton
 addButton.addEventListener ('click', openPopup);
-//Обработчик события click на кнопке closeButton popup карточки
-popupCard.querySelector('.close-button_popup').addEventListener('click', closePopupCard);
+//Обработчик события click при отправке формы edit-profile
+popupEditProfileSubmit.addEventListener('click', editFormSubmit);
+//Обработчик события click при отправке формы add-card
+popupAddCardSubmit.addEventListener('click', addFormSubmit);
+//Обработчик события click на кнопке closeButton на popup карточки
+popupCardClose.addEventListener('click', closePopupCard);
+//Обработчик события click на кнопке closeButton на popup редактирования профиля
+popupEditProfileClose.addEventListener('click', closePopup);
+//Обработчик события click на кнопке closeButton на popup карточки
+popupAddCardClose.addEventListener('click', closePopup);
 
 //Действия при загрузке страницы
 //Добавление карточек
 loadInitialCards();
-//Добавление popup редактирования профиля
-document.body.append(popupEditProfile);
-//Добавление popup добавления карточки нового места
-document.body.append(popupAddCard);
+
 

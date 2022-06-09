@@ -1,5 +1,4 @@
 .element__like_active {
   opacity: 1;
   background-image: url(../../../../images/Union.svg);
-  box-shadow: 0px 0px 2px 3px rgb(89, 137, 233);
 }
