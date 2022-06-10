@@ -56,7 +56,7 @@ function openPopup (popup) {
 function closePopup (popup) {
   popup.classList.remove('popup_opened');
 }
-//
+//Обработка события при нажатии на кнопку закрытия popup
 function closePopupButton (e) {
   const popup = e.target.parentElement.parentElement;
   if (popup.classList.contains('popup_opened'))
