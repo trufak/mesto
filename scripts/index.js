@@ -60,20 +60,16 @@ function closePopup (popup) {
   }
 }
 //Открыть popup изменения профиля
-function openPopupEditProfile (popup) {
-  return function () {
-    popupNameProfile.value = nameProfile.textContent;
-    popupDescProfile.value = descriptProfile.textContent;
-    openPopup(popup);
-  }
+function openPopupEditProfile () {
+  popupNameProfile.value = nameProfile.textContent;
+  popupDescProfile.value = descriptProfile.textContent;
+  openPopup(popupEditProfile);
 }
 //Открыть popup добавления карточки
-function openPopupAddCard (popup) {
-  return function () {
-    popupNameCard.value = null;
-    popupLinkCard.value = null;
-    openPopup(popup);
-  }
+function openPopupAddCard () {
+  popupNameCard.value = null;
+  popupLinkCard.value = null;
+  openPopup(popupAddCard);
 }
 //Отправка формы редактирования профиля
 function editFormSubmit (e) {
@@ -116,9 +112,9 @@ function openImagePopup(e) {
 
 //Обработчики событий
 //Обработчик события click на кнопке editButton
-editButton.addEventListener ('click', openPopupEditProfile(popupEditProfile));
+editButton.addEventListener ('click', openPopupEditProfile);
 //Обработчик события click на кнопке addButton
-addButton.addEventListener ('click', openPopupAddCard(popupAddCard));
+addButton.addEventListener ('click', openPopupAddCard);
 //Обработчик события click при отправке формы edit-profile
 formEditProfile.addEventListener('submit', editFormSubmit);
 //Обработчик события click при отправке формы add-card
