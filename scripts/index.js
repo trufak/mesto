@@ -58,14 +58,14 @@ const openPopup = (popup) => {
 const closePopup = (popup) => {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', closePopupEsc);
-  const form = popup.querySelector(formValidSetting.formSelector);
+  const form = getForm(popup);
   if (form) clearErrors(form, formValidSetting);
 };
 //Открыть popup изменения профиля
 const openPopupEditProfile = () => {
   popupNameProfile.value = nameProfile.textContent;
   popupDescProfile.value = descriptProfile.textContent;
-  popupEditProfileSubmit.classList.add(formValidSetting.inactiveButtonClass);
+  toggleButtonState(getInputList(formEditProfile,formValidSetting.inputSelector),popupEditProfileSubmit,formValidSetting.inactiveButtonClass);
   openPopup(popupEditProfile);
 };
 //Открыть popup добавления карточки
@@ -133,6 +133,10 @@ const closePopupEsc = (e) => {
         closePopup(popup);
     });
   }
+};
+//Получить элемент формы popup
+const getForm = (popup) => {
+  return popup.querySelector(formValidSetting.formSelector);
 };
 //Получить массив полей формы
 const getInputList = (formElement, inputSelector) => {
