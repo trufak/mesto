@@ -4,16 +4,16 @@
   appearance: none;
   display: block;
   width: 100%;
-  margin: 45px 0 0;
+  margin: 16px 0 0;
   background: #000000;
   border-radius: 2px;
-  border: none;
+  border: 1px solid #000000;
   cursor: pointer;
   font-size: 18px;
   line-height: 22px;
   text-align: center;
   color: #FFFFFF;
-  padding: 14px 0 14px;
+  padding: 13px 0 13px;
 }
 
 @media screen and (max-width: 568px){

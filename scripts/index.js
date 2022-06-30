@@ -32,13 +32,13 @@ const popupCardCaption = popupCard.querySelector('.popup__caption');
 
 //Функции
 //Загрузка карточек при старте страницы
-function loadInitialCards() {
+const loadInitialCards = () => {
   initialCards.forEach (initData => {
     elements.append(createCard(initData.name, initData.link));
   });
-}
+};
 //Создание карточки
-function createCard (name, link) {
+const createCard = (name, link) => {
   const card = cardTemplate.querySelector('.elements__item').cloneNode(true);
   const cardMask = card.querySelector('.element__mask')
   cardMask.src = link;
@@ -46,69 +46,102 @@ function createCard (name, link) {
   card.querySelector('.element__caption').textContent = name;
   card.querySelector('.element__like').addEventListener('click', likeCard);
   card.querySelector('.element__delete').addEventListener('click', deleteCard);
-  cardMask.addEventListener('click', openPopupCard);
+  cardMask.addEventListener('click', openImagePopup);
   return card;
-}
+};
 //Открыть popup
-function openPopup (popup) {
+const openPopup = (popup) => {
   popup.classList.add('popup_opened');
-}
+  document.addEventListener('keydown', closePopupEsc);
+};
 //Закрыть popup
-function closePopup (popup) {
-  return function () {
-    popup.classList.remove('popup_opened');
-  }
-}
+const closePopup = (popup) => {
+  popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
+  const form = popup.querySelector(formValidSetting.formSelector);
+  if (form) clearErrors(form, formValidSetting);
+};
 //Открыть popup изменения профиля
-function openPopupEditProfile () {
+const openPopupEditProfile = () => {
   popupNameProfile.value = nameProfile.textContent;
   popupDescProfile.value = descriptProfile.textContent;
+  popupEditProfileSubmit.classList.add(formValidSetting.inactiveButtonClass);
   openPopup(popupEditProfile);
-}
+};
 //Открыть popup добавления карточки
-function openPopupAddCard () {
+const openPopupAddCard = () => {
   popupNameCard.value = null;
   popupLinkCard.value = null;
+  popupAddCardSubmit.classList.add(formValidSetting.inactiveButtonClass);
   openPopup(popupAddCard);
-}
+};
 //Отправка формы редактирования профиля
-function editFormSubmit (e) {
+const editFormSubmit = (e) => {
   e.preventDefault();
-  nameProfile.textContent = popupNameProfile.value;
-  descriptProfile.textContent = popupDescProfile.value;
-  const popup = e.target.parentElement.parentElement;
-  closePopup(popup)();
-}
+  const submitButton = getSubmitButton (e.target, formValidSetting.submitButtonSelector);
+  if (!submitButton.classList.contains('popup__submit-button_disable'))  {
+    nameProfile.textContent = popupNameProfile.value;
+    descriptProfile.textContent = popupDescProfile.value;
+    closePopup(popupEditProfile);
+  }
+};
 //Отправка формы добавления карточки нового места
-function addFormSubmit (e) {
+const addFormSubmit = (e) => {
   e.preventDefault();
-  //Создание и добавление новой карточки
-  elements.insertBefore(createCard(popupNameCard.value, popupLinkCard.value),
-                                  elements.firstChild);
-  //Закрытие popup
-  const popup = e.target.parentElement.parentElement;
-  closePopup(popup)();
-}
+  const submitButton = getSubmitButton (e.target, formValidSetting.submitButtonSelector);
+  if (!submitButton.classList.contains('popup__submit-button_disable'))  {
+    elements.insertBefore(createCard(popupNameCard.value, popupLinkCard.value),
+                                    elements.firstChild);
+    closePopup(popupAddCard);
+  }
+};
 //Изменение стилей cardLikeButtons при нажатии
-function likeCard(e) {
+const likeCard = (e) => {
   e.target.classList.toggle('element__like_active');
-}
+};
 //Удаление карточки
-function deleteCard(e) {
+const deleteCard = (e) => {
   e.target.parentElement.parentElement.remove();
-}
-//Открытие popup карточки
-function openPopupCard (e) {
-  openImagePopup(e);
-  openPopup(popupCard);
-}
-
+};
 //Загрузка изображения в popup карточки
-function openImagePopup(e) {
+const openImagePopup = (e) => {
   popupCardMask.src = e.target.src;
   popupCardMask.alt = e.target.alt;
   popupCardCaption.textContent = e.target.alt;
-}
+  openPopup(popupCard);
+};
+//Получить список popup
+const getPopupList = () => {
+  return Array.from(document.querySelectorAll('.popup'));
+};
+//Добавление всем popup слушателей закрытия
+const setEventListenerClosePopup = () => {
+  const popupList = getPopupList();
+  popupList.forEach(popup => {
+    popup.addEventListener('mousedown', (e) => {
+      if (e.target.classList.contains('popup') | e.target.classList.contains('close-button'))
+        closePopup(popup);
+    });
+  });
+};
+//Добавление popup слушателя закрытия по нажатию Esc
+const closePopupEsc = (e) => {
+  if (e.key === 'Escape') {
+    const popupList = getPopupList();
+    popupList.forEach(popup => {
+      if (popup.classList.contains('popup_opened'))
+        closePopup(popup);
+    });
+  }
+};
+//Получить массив полей формы
+const getInputList = (formElement, inputSelector) => {
+  return Array.from(formElement.querySelectorAll(inputSelector));
+};
+//Получить кнопку submit формы
+const getSubmitButton = (formElement, submitButtonSelector) => {
+  return formElement.querySelector(submitButtonSelector);
+};
 
 //Обработчики событий
 //Обработчик события click на кнопке editButton
@@ -119,15 +152,10 @@ addButton.addEventListener ('click', openPopupAddCard);
 formEditProfile.addEventListener('submit', editFormSubmit);
 //Обработчик события click при отправке формы add-card
 formAddCard.addEventListener('submit', addFormSubmit);
-//Обработчик события click на кнопке closeButton на popup карточки
-popupCardClose.addEventListener('click', closePopup(popupCard));
-//Обработчик события click на кнопке closeButton на popup редактирования профиля
-popupEditProfileClose.addEventListener('click', closePopup(popupEditProfile));
-//Обработчик события click на кнопке closeButton на popup карточки
-popupAddCardClose.addEventListener('click', closePopup(popupAddCard));
-
 //Действия при загрузке страницы
 //Добавление карточек
 loadInitialCards();
-
-
+//Добавление валидации всем формам
+enableValidation(formValidSetting);
+//Добавление обработчиков закрытия popup
+setEventListenerClosePopup();
