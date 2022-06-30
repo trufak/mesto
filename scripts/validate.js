@@ -10,23 +10,23 @@ const formValidSetting = {
 
 //Функции валидации
 //Отображение сообщения об ошибке
-const showInputError = (formElement, inputElement, errorMessage, formValidSetting) => {
-  const errorElement = formElement.querySelector(`${formValidSetting.inputSelector}_${inputElement.id}-error`);
-  inputElement.classList.add(formValidSetting.inputErrorClass);
+const showInputError = (formElement, inputElement, errorMessage, inputErrorClass) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add(inputErrorClass);
   errorElement.textContent = errorMessage;
 };
 //Скрытие сообщения об ошибке
-const hideInputError = (formElement, inputElement, formValidSetting) => {
-  const errorElement = formElement.querySelector(`${formValidSetting.inputSelector}_${inputElement.id}-error`);
-  inputElement.classList.remove(formValidSetting.inputErrorClass);
+const hideInputError = (formElement, inputElement, inputErrorClass) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove(inputErrorClass);
   errorElement.textContent = '';
 };
 //Валидация поля
 const isValid = (formElement, inputElement, formValidSetting) => {
   if (!inputElement.validity.valid)
-    showInputError(formElement, inputElement, inputElement.validationMessage, formValidSetting);
+    showInputError(formElement, inputElement, inputElement.validationMessage, formValidSetting.inputErrorClass);
   else
-    hideInputError(formElement, inputElement, formValidSetting);
+    hideInputError(formElement, inputElement, formValidSetting.inputErrorClass);
 };
 //Добавление обработчиков всем полям формы
 const setEventListener = (formElement, formValidSetting) => {
@@ -67,7 +67,7 @@ const enableValidation = (formValidSetting) => {
 const clearErrors = (formElement, formValidSetting) => {
   const inputList = getInputList(formElement, formValidSetting.inputSelector);
   inputList.forEach(inputElement => {
-    hideInputError (formElement, inputElement, formValidSetting);
+    hideInputError (formElement, inputElement, formValidSetting.inputErrorClass);
   });
 };
 
