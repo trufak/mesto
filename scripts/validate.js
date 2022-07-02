@@ -48,18 +48,19 @@ const hasInvalidInput = (inputList) => {
 };
 //Стилизация кнопки submit
 const toggleButtonState = (inputList, buttonElement, inactiveButtonClass) => {
-  if(hasInvalidInput(inputList))
+  if(hasInvalidInput(inputList)) {
+    buttonElement.disabled = true;
     buttonElement.classList.add(inactiveButtonClass);
-  else
+  }
+  else {
+    buttonElement.disabled = false;
     buttonElement.classList.remove(inactiveButtonClass);
+  }
 }
 //Добавление валидации всем формам
 const enableValidation = (formValidSetting) => {
   const formList = document.querySelectorAll(formValidSetting.formSelector);
   formList.forEach(formElement => {
-    formElement.addEventListener('submit', (e) => {
-      e.preventDefault();
-    });
     setEventListener(formElement, formValidSetting);
   });
 };
@@ -70,4 +71,7 @@ const clearErrors = (formElement, formValidSetting) => {
     hideInputError (formElement, inputElement, formValidSetting.inputErrorClass);
   });
 };
-
+//Получить массив полей формы
+const getInputList = (formElement, inputSelector) => {
+  return Array.from(formElement.querySelectorAll(inputSelector));
+};
