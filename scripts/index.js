@@ -33,10 +33,10 @@ const popupCardCaption = popupCard.querySelector('.popup__caption');
 
 //Функции
 //Загрузка изображения в popup карточки
-export const openImagePopup = (name, link) => {
-  popupCardMask.src = link;
-  popupCardMask.alt = name;
-  popupCardCaption.textContent = name;
+const openImagePopup = (card) => {
+  popupCardMask.src = card._link;
+  popupCardMask.alt = card._name;
+  popupCardCaption.textContent = card._name;
   openPopup(popupCard);
 };
 //Открыть popup
@@ -47,7 +47,7 @@ const openPopup = (popup) => {
 //Загрузка карточек при старте страницы
 const loadInitialCards = () => {
   initialCards.forEach (initData => {
-    const cardElement = new Card(initData.name, initData.link, '#card');
+    const cardElement = new Card(initData.name, initData.link, '#card', openImagePopup);
     cardsContainer.append(cardElement.getElement());
   });
 };
@@ -83,7 +83,7 @@ const editFormSubmit = (e) => {
 //Отправка формы добавления карточки нового места
 const addFormSubmit = (e) => {
   e.preventDefault();
-  const cardElement = new Card(popupNameCard.value, popupLinkCard.value, '#card');
+  const cardElement = new Card(popupNameCard.value, popupLinkCard.value, '#card', openImagePopup);
   cardsContainer.prepend(cardElement.getElement());
   closePopup(popupAddCard);
 };

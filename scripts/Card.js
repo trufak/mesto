@@ -1,10 +1,9 @@
-import {openImagePopup} from "./index.js"
-
 export default class Card {
-  constructor (name, link, selectorTemplate) {
+  constructor (name, link, selectorTemplate, handleClickImage) {
     this._name = name;
     this._link = link;
     this._selectorTemplate = selectorTemplate;
+    this._handleClickImage = handleClickImage;
   }
    //Создание карточки
   getElement () {
@@ -25,7 +24,8 @@ export default class Card {
     cardElement.querySelector('.element__like').addEventListener('click', this._likeCard);
     cardElement.querySelector('.element__delete').addEventListener('click', this._deleteCard);
     cardElement.querySelector('.element__mask').addEventListener('click', () => {
-      openImagePopup(this._name, this._link) });
+      this._handleClickImage(this);
+    });
   }
   //Лайк карточки
   _likeCard (e) {
