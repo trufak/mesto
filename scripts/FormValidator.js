@@ -10,7 +10,7 @@ export default class FormValidator {
   }
   //Очистка полей ошибок формы
   clearErrors = () => {
-    const inputList = this._getInputList(this._formValidSetting.inputSelector);
+    const inputList = this._getInputList();
     inputList.forEach(inputElement => {
       this._hideInputError (inputElement);
     });
@@ -18,19 +18,19 @@ export default class FormValidator {
 
   //Добавление обработчиков всем полям формы
   _setEventListener = () => {
-    const inputList = this._getInputList(this._formValidSetting.inputSelector);
+    const inputList = this._getInputList();
     const buttonElement = this._formElement.querySelector(this._formValidSetting .submitButtonSelector);
-    this._toggleButtonState (inputList, buttonElement, this._formValidSetting .inactiveButtonClass);
+    this._toggleButtonState (inputList, buttonElement);
     inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
-        this._toggleButtonState (inputList, buttonElement, this._formValidSetting .inactiveButtonClass);
+        this._toggleButtonState (inputList, buttonElement);
       });
     });
   }
   //Получить массив полей формы
-  _getInputList (inputSelector) {
-    return Array.from(this._formElement.querySelectorAll(inputSelector));
+  _getInputList () {
+    return Array.from(this._formElement.querySelectorAll(this._formValidSetting.inputSelector));
   }
   //Стилизация кнопки submit
   _toggleButtonState (inputList, buttonElement) {
