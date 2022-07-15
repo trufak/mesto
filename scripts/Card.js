@@ -1,3 +1,5 @@
+import {openImagePopup} from "./index.js"
+
 export default class Card {
   constructor (name, link, selectorTemplate) {
     this._name = name;

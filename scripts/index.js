@@ -33,18 +33,24 @@ const popupCardMask = popupCard.querySelector('.popup__mask');
 const popupCardCaption = popupCard.querySelector('.popup__caption');
 
 //Функции
+//Загрузка изображения в popup карточки
+export const openImagePopup = (name, link) => {
+  popupCardMask.src = link;
+  popupCardMask.alt = name;
+  popupCardCaption.textContent = name;
+  openPopup(popupCard);
+};
+//Открыть popup
+const openPopup = (popup) => {
+  popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
+};
 //Загрузка карточек при старте страницы
 const loadInitialCards = () => {
   initialCards.forEach (initData => {
     const cardElement = new Card(initData.name, initData.link, '#card');
     cardsContainer.append(cardElement.getElement());
   });
-};
-
-//Открыть popup
-const openPopup = (popup) => {
-  popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closePopupEsc);
 };
 //Закрыть popup
 const closePopup = (popup) => {
@@ -81,13 +87,6 @@ const addFormSubmit = (e) => {
   closePopup(popupAddCard);
 };
 
-//Загрузка изображения в popup карточки
-const openImagePopup = (name, link) => {
-  popupCardMask.src = link;
-  popupCardMask.alt = name;
-  popupCardCaption.textContent = name;
-  openPopup(popupCard);
-};
 //Получить список popup
 const getPopupList = () => {
   return Array.from(document.querySelectorAll('.popup'));
@@ -127,6 +126,6 @@ formAddCard.addEventListener('submit', addFormSubmit);
 //Добавление карточек
 loadInitialCards();
 //Добавление валидации всем формам
-enableValidation(formValidSetting);
+//enableValidation(formValidSetting);
 //Добавление обработчиков закрытия popup
 setEventListenerClosePopup();
