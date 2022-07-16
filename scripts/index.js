@@ -46,10 +46,13 @@ const openPopup = (popup) => {
 };
 //Загрузка карточек при старте страницы
 const loadInitialCards = () => {
-  initialCards.forEach (initData => {
-    const cardElement = new Card(initData.name, initData.link, '#card', openImagePopup);
-    cardsContainer.append(cardElement.getElement());
+   initialCards.forEach (initData => {
+    cardsContainer.append(createCard(initData.name, initData.link));
   });
+};
+const createCard = (name,link) => {
+  const card = new Card(name, link, '#card', openImagePopup);
+  return card.getElement();
 };
 //Закрыть popup
 const closePopup = (popup) => {
@@ -58,19 +61,15 @@ const closePopup = (popup) => {
 };
 //Открыть popup изменения профиля
 const openPopupEditProfile = () => {
-  formValidatorEditProfile.clearErrors();
   popupNameProfile.value = nameProfile.textContent;
   popupDescProfile.value = descriptProfile.textContent;
-  popupEditProfileSubmit.classList.add(formValidSetting.inactiveButtonClass);
-  popupEditProfileSubmit.disable = true;
+  formValidatorEditProfile.clearErrors();
   openPopup(popupEditProfile);
 };
 //Открыть popup добавления карточки
 const openPopupAddCard = () => {
-  formValidatorEditProfile.clearErrors();
   formAddCard.reset();
-  popupAddCardSubmit.classList.add(formValidSetting.inactiveButtonClass);
-  popupAddCardSubmit.disable = true;
+  formValidatorAddCard.clearErrors();
   openPopup(popupAddCard);
 };
 //Отправка формы редактирования профиля
@@ -83,11 +82,9 @@ const editFormSubmit = (e) => {
 //Отправка формы добавления карточки нового места
 const addFormSubmit = (e) => {
   e.preventDefault();
-  const cardElement = new Card(popupNameCard.value, popupLinkCard.value, '#card', openImagePopup);
-  cardsContainer.prepend(cardElement.getElement());
+  cardsContainer.prepend(createCard(popupNameCard.value, popupLinkCard.value));
   closePopup(popupAddCard);
 };
-
 //Получить список popup
 const getPopupList = () => {
   return Array.from(document.querySelectorAll('.popup'));

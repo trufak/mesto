@@ -12,9 +12,9 @@ export default class Card {
                   .content
                   .querySelector('.elements__item')
                   .cloneNode(true);
-    const cardMask = cardElement.querySelector('.element__mask')
-    cardMask.src = this._link;
-    cardMask.alt = this._name;
+    this._cardMask = cardElement.querySelector('.element__mask')
+    this._cardMask.src = this._link;
+    this._cardMask.alt = this._name;
     cardElement.querySelector('.element__caption').textContent = this._name;
     this._setEventListener(cardElement);
     return cardElement;
@@ -23,7 +23,7 @@ export default class Card {
   _setEventListener (cardElement) {
     cardElement.querySelector('.element__like').addEventListener('click', this._likeCard);
     cardElement.querySelector('.element__delete').addEventListener('click', this._deleteCard);
-    cardElement.querySelector('.element__mask').addEventListener('click', () => {
+    this._cardMask.addEventListener('click', () => {
       this._handleClickImage(this);
     });
   }
