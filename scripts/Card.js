@@ -12,7 +12,7 @@ export default class Card {
                   .content
                   .querySelector('.elements__item')
                   .cloneNode(true);
-    this._cardMask = cardElement.querySelector('.element__mask')
+    this._cardMask = cardElement.querySelector('.element__mask');
     this._cardMask.src = this._link;
     this._cardMask.alt = this._name;
     cardElement.querySelector('.element__caption').textContent = this._name;
