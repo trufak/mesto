@@ -1,9 +1,9 @@
 export default class Card {
-  constructor (name, link, selectorTemplate, handleClickImage) {
+  constructor (name, link, selectorTemplate, handleCardClick) {
     this._name = name;
     this._link = link;
     this._selectorTemplate = selectorTemplate;
-    this._handleClickImage = handleClickImage;
+    this._handleCardClick = handleCardClick;
   }
    //Создание карточки
   getElement () {
@@ -24,7 +24,7 @@ export default class Card {
     cardElement.querySelector('.element__like').addEventListener('click', this._likeCard);
     cardElement.querySelector('.element__delete').addEventListener('click', this._deleteCard);
     this._cardMask.addEventListener('click', () => {
-      this._handleClickImage(this);
+      this._handleCardClick(this);
     });
   }
   //Лайк карточки

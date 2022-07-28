@@ -25,6 +25,7 @@ export default class FormValidator {
         this._toggleButtonState ();
       });
     });
+    this._formElement.addEventListener('reset', this.clearErrors.bind(this));
   }
   //Стилизация кнопки submit
   _toggleButtonState () {
