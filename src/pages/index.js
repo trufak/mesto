@@ -1,17 +1,19 @@
-import initialCards from '../utils/initial-cards.js';
-import Card from '../components/Card.js';
-import FormValidator from '../utils/FormValidator.js';
-import formValidSetting from '../utils/formValidSetting.js';
-import Section from '../components/Section.js';
+import initialCards from '../scripts/utils/initial-cards.js';
+import Card from '../scripts/components/Card.js';
+import FormValidator from '../scripts/utils/FormValidator.js';
+import formValidSetting from '../scripts/utils/formValidSetting.js';
+import Section from '../scripts/components/Section.js';
 import {
   nameProfile,
   descriptProfile,
   buttonOpenPopupProfile,
   buttonOpenPopupAddCard
-} from '../utils/constants.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm.js';
-import UserInfo from '../components/UserInfo.js';
+} from '../scripts/utils/constants.js';
+import PopupWithImage from '../scripts/components/PopupWithImage.js';
+import PopupWithForm from '../scripts/components/PopupWithForm.js';
+import UserInfo from '../scripts/components/UserInfo.js';
+
+import './index.css';
 
 //Создание объекта данных пользователя
 const userInfo = new UserInfo(nameProfile, descriptProfile);
