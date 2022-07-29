@@ -1,6 +1,6 @@
 import initialCards from '../scripts/utils/initial-cards.js';
 import Card from '../scripts/components/Card.js';
-import FormValidator from '../scripts/utils/FormValidator.js';
+import FormValidator from '../scripts/components/FormValidator.js';
 import formValidSetting from '../scripts/utils/formValidSetting.js';
 import Section from '../scripts/components/Section.js';
 import {

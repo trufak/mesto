@@ -8,7 +8,7 @@ export default class FormValidator {
     this._setEventListener();
   }
   //Очистка полей ошибок формы
-  clearErrors () {
+  _clearErrors () {
     this._inputList.forEach(inputElement => {
       this._hideInputError (inputElement);
     });
@@ -25,7 +25,7 @@ export default class FormValidator {
         this._toggleButtonState ();
       });
     });
-    this._formElement.addEventListener('reset', this.clearErrors.bind(this));
+    this._formElement.addEventListener('close', this._clearErrors.bind(this));
   }
   //Стилизация кнопки submit
   _toggleButtonState () {
