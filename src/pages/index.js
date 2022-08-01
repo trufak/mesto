@@ -22,14 +22,18 @@ const submitEditForm = (inputValues) => {
   userInfo.setUserInfo(inputValues.name, inputValues.description)
   popupWithFormEditProfile.close();
 };
-//Отправка формы добавления карточки нового места
-const submitAddForm = (inputValues) => {
+//Создание карточки
+const createCard = (cardItem) => {
   const card = new Card(
-    inputValues.name,
-    inputValues.link,
+    cardItem.name,
+    cardItem.link,
     '#card',
     popupWithImage.open.bind(popupWithImage));
-  const cardElement = card.getElement();
+  return card.getElement();
+};
+//Отправка формы добавления карточки нового места
+const submitAddForm = (inputValues) => {
+  const cardElement = createCard(inputValues);
   cardList.addItem(cardElement, false);
   popupWithFromAddCard.close();
 };
@@ -45,11 +49,13 @@ popupWithFromAddCard.setEventListeners();
 const formValidatorEditProfile = new FormValidator(
   formValidSetting,
   popupWithFormEditProfile.getFormElement());
+popupWithFormEditProfile.formValidator = formValidatorEditProfile;
 formValidatorEditProfile.enableValidation();
 //Добавление валидации форме добавления карточки
 const formValidatorAddCard = new FormValidator(
   formValidSetting,
   popupWithFromAddCard.getFormElement());
+popupWithFromAddCard.formValidator = formValidatorAddCard;
 formValidatorAddCard.enableValidation();
 
 //Создание объекта класса Section для обновления карточек на странице
@@ -57,12 +63,7 @@ const cardList = new Section(
   {
     items: initialCards,
     renderer: (cardItem) => {
-      const card = new Card(
-        cardItem.name,
-        cardItem.link,
-        '#card',
-        popupWithImage.open.bind(popupWithImage));
-      const cardElement = card.getElement();
+      const cardElement = createCard(cardItem);
       cardList.addItem(cardElement, true);
     }
   },

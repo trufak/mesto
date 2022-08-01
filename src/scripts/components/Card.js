@@ -7,32 +7,35 @@ export default class Card {
   }
    //Создание карточки
   getElement () {
-    const cardElement = document
+    this._cardElement = document
                   .querySelector(this._selectorTemplate)
                   .content
                   .querySelector('.elements__item')
                   .cloneNode(true);
-    this._cardMask = cardElement.querySelector('.element__mask');
+    this._cardMask = this._cardElement.querySelector('.element__mask');
     this._cardMask.src = this._link;
     this._cardMask.alt = this._name;
-    cardElement.querySelector('.element__caption').textContent = this._name;
-    this._setEventListener(cardElement);
-    return cardElement;
+    this._cardElement.querySelector('.element__caption').textContent = this._name;
+    this._likeElement = this._cardElement.querySelector('.element__like');
+    this._deleteElement = this._cardElement.querySelector('.element__delete');
+    this._setEventListener();
+    return this._cardElement;
   }
   //Установка слушателей
-  _setEventListener (cardElement) {
-    cardElement.querySelector('.element__like').addEventListener('click', this._likeCard);
-    cardElement.querySelector('.element__delete').addEventListener('click', this._deleteCard);
+  _setEventListener () {
+    this._likeElement.addEventListener('click', this._likeCard.bind(this));
+    this._deleteElement.addEventListener('click', this._deleteCard.bind(this));
     this._cardMask.addEventListener('click', () => {
       this._handleCardClick(this);
     });
   }
   //Лайк карточки
-  _likeCard (e) {
-    e.target.classList.toggle('element__like_active');
+  _likeCard () {
+    this._likeElement.classList.toggle('element__like_active');
   }
   //Удаление карточки
-  _deleteCard (e) {
-    e.target.closest('.elements__item').remove();
+  _deleteCard () {
+    this._cardElement.remove();
+    this._cardElement = null;
   };
 }
