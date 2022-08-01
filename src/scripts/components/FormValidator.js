@@ -3,6 +3,7 @@ export default class FormValidator {
     this._formValidSetting = formValidSetting;
     this._formElement = formElement;
     this._inputList = Array.from(this._formElement.querySelectorAll(this._formValidSetting.inputSelector));
+    this._buttonElement = this._formElement.querySelector(this._formValidSetting .submitButtonSelector);
   }
   //Добавить валидацию форме
   enableValidation () {
@@ -17,7 +18,6 @@ export default class FormValidator {
   }
   //Добавление обработчиков всем полям формы
   _setEventListener = () => {
-    this._buttonElement = this._formElement.querySelector(this._formValidSetting .submitButtonSelector);
     this._toggleButtonState ();
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
